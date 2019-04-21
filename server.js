@@ -1,4 +1,5 @@
 const express = require('express');
+const morgan = require("morgan");
 const app = express();
 
 const user = process.env.USER;
@@ -10,7 +11,12 @@ if (user && pass) {
   app.use(express.basicAuth(user, pass));
 }
 
-app.use(express.logger('dev'));
+// app.use(express.logger('dev'));
+app.use(
+    morgan(
+      ':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] :response-time ms'
+    )
+);
 app.use(express.compress());
 // app.use(express.static(__dirname + '/public'));
 app.use(express.static('public'));
