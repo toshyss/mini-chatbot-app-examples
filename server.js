@@ -19,7 +19,8 @@ app.use(
 );
 app.use(express.compress());
 // app.use(express.static(__dirname + '/public'));
-app.use(express.static('public'));
+// app.use(express.static('public'));
+app.use(express.static(path.resolve(__dirname, "..", "public")));
 
 app.listen(app.get('port'), function() {
   console.log('Server listening on port %s', app.get('port'));
